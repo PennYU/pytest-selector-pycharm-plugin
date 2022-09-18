@@ -35,7 +35,7 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <toolWindow id="Sample Calendar" secondary="true" icon="AllIcons.General.Modified" anchor="right"
-                factoryClass="org.intellij.sdk.toolWindow.MyToolWindowFactory"/>
+                factoryClass="org.intellij.sdk.toolWindow.PythonTestToolWindowFactory"/>
   </extensions>
 
 </idea-plugin>
