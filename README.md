@@ -1,0 +1,1 @@
+# pytest-selector-pycharm-plugin
