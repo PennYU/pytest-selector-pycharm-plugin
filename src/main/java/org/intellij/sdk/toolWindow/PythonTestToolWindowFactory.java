@@ -28,35 +28,12 @@ public class PythonTestToolWindowFactory implements ToolWindowFactory {
    */
   public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
     ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-    CheckboxTree.CheckboxTreeCellRenderer cellRenderer = new CheckboxTree.CheckboxTreeCellRenderer(true, false) {
-      @Override
-      public void customizeRenderer(JTree tree,
-                                    Object value,
-                                    boolean selected,
-                                    boolean expanded,
-                                    boolean leaf,
-                                    int row,
-                                    boolean hasFocus) {
-        if (value instanceof DefaultMutableTreeNode) {
-          getCheckbox().setVisible(true);
-          getTextRenderer().append("hello");
-        }
-      }
-    };
-
-    CheckedTreeNode root = new CheckedTreeNode(null);
-    DefaultMutableTreeNode variantNode = new DefaultMutableTreeNode("hello world");
-    variantNode.add(new DefaultMutableTreeNode("dependent1"));
-    root.add(variantNode);
-    Tree tree = new CheckboxTree(cellRenderer, root, new CheckboxTreeBase.CheckPolicy(false, true, true, false));
-    tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-    tree.setRootVisible(false);
-    TreeUtil.expandAll(tree);
+    PythonTestTreeCellRenderer renderer = new PythonTestTreeCellRenderer();
+    PythonTestTreeNode root = PythonTestTree.createTree(project);
+    PythonTestTree tree = new PythonTestTree(renderer, root);
     JPanel p = new JPanel();
     p.add(tree);
     Content content = contentFactory.createContent(p, "", false);
     toolWindow.getContentManager().addContent(content);
-
   }
-
 }
